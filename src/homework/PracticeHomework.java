@@ -19,11 +19,7 @@ public class PracticeHomework {
     //վերադարձնել true եթե տրված a և b թվերը իրար հավասար են, եթե ոչ՝ false
 
     public boolean isSameNum(int a, int b) {
-        boolean isTrue = false;
-        if (a == b) {
-            isTrue = true;
-        }
-        return isTrue;
+        return a == b;
     }
 
     //վերադարձնել true-եթե թիվը փոքր կամ հավասար է 0-ին։
@@ -31,11 +27,7 @@ public class PracticeHomework {
 
 
     boolean lessThanOrEqualToZero(int number) {
-        boolean isTrue = false;
-        if (number <= 0) {
-            isTrue = true;
-        }
-        return isTrue;
+        return number <= 0;
     }
 
     //վերադարձնել ընդունող բուլյանի ժխտված արժեքը։
