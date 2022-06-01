@@ -25,7 +25,6 @@ public class PracticeHomework {
     //վերադարձնել true-եթե թիվը փոքր կամ հավասար է 0-ին։
     //մնացած դեպքերում վերադարձնել false
 
-
     boolean lessThanOrEqualToZero(int number) {
         return number <= 0;
     }
@@ -37,10 +36,7 @@ public class PracticeHomework {
 
     //վերադարձնել երկու մասիվի ամենամեծ length-ը
     int maxLength(int[] array1, int[] array2) {
-        if (array1.length > array2.length) {
-            return array1.length;
-        }
-        return array2.length;
+        return array1.length > array2.length ? array1.length : array2.length;
     }
 }
 
