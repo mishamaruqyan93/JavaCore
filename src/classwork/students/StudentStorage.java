@@ -112,6 +112,11 @@ public class StudentStorage {
     }
 
     public void changeLesson(int index, String lesson) {
-        getByIndex(index).setLesson(lesson);
+        Student student = getByIndex(index);
+        if (student != null) {
+            student.setLesson(lesson);
+        } else {
+            System.out.println("IndexOutOfBoundsException");
+        }
     }
 }
