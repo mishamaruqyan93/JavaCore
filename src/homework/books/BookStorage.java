@@ -43,8 +43,9 @@ public class BookStorage {
                 }
             }
             check(isTrue);
+        }else {
+            System.out.println("There are not any book");
         }
-        System.out.println("There are not any book");
     }
 
     public void printBooksByGenre(String genre) {
@@ -58,7 +59,9 @@ public class BookStorage {
             }
             check(isTrue);
         }
-        System.out.println("There are not any book");
+        else {
+            System.out.println("There are not any book");
+        }
     }
 
     public void printBooksByPriceRange(double from, double to) {
@@ -71,8 +74,9 @@ public class BookStorage {
                 }
             }
             check(isTrue);
+        }else{
+            System.out.println("There are not any book");
         }
-        System.out.println("There are not any book");
     }
 
     private boolean isEmpty() {
