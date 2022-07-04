@@ -1,4 +1,6 @@
-package homework.books;
+package homework.books.storage;
+
+import homework.books.model.Book;
 
 public class BookStorage {
     private Book[] books;
@@ -35,15 +37,12 @@ public class BookStorage {
 
     public void printBookByAuthor(String authorName) {
         if (!isEmpty()) {
-            boolean isTrue = false;
             for (int i = 0; i < size; i++) {
-                if (books[i].getAuthorName().equals(authorName)) {
+                if (books[i].getAuthor().getName().equals(authorName)) {
                     System.out.println(books[i]);
-                    isTrue = true;
                 }
             }
-            check(isTrue);
-        }else {
+        } else {
             System.out.println("There are not any book");
         }
     }
@@ -58,8 +57,7 @@ public class BookStorage {
                 }
             }
             check(isTrue);
-        }
-        else {
+        } else {
             System.out.println("There are not any book");
         }
     }
@@ -74,7 +72,7 @@ public class BookStorage {
                 }
             }
             check(isTrue);
-        }else{
+        } else {
             System.out.println("There are not any book");
         }
     }
