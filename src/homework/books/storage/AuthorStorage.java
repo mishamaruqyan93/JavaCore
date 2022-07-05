@@ -33,9 +33,11 @@ public class AuthorStorage {
 
     public Author getAuthorByIndex(int index) throws AuthorNotFoundException {
         if (index >= 0 && index < size) {
-            return authors[index];
+            if (authors[index] == null) {
+                throw new AuthorNotFoundException("Author was not found by index: " + index);
+            }
         }
-        throw new AuthorNotFoundException("Author was not found by index: " + index);
+        return authors[index];
     }
 
     private void check(boolean isTrue) {
