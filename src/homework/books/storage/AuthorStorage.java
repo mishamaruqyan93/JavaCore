@@ -31,25 +31,20 @@ public class AuthorStorage {
         return size == 0;
     }
 
-    public Author getAuthorByIndex(int index) throws AuthorNotFoundException {
+    public Author getAuthorByIndex(int index) throws AuthorNotFoundException, ArrayIndexOutOfBoundsException {
         if (index >= 0 && index < size) {
             if (authors[index] == null) {
                 throw new AuthorNotFoundException("Author was not found by index: " + index);
             }
+        } else if (index >= size) {
+            throw new ArrayIndexOutOfBoundsException("The index is either negative or greater than or equal to the size of the array.");
         }
         return authors[index];
-    }
-
-    private void check(boolean isTrue) {
-        if (!isTrue) {
-            System.out.println("Data does not exists");
-        }
     }
 
     public void print() {
         for (int i = 0; i < size; i++) {
             System.out.println(i + " " + authors[i]);
-
         }
     }
 }

@@ -1,7 +1,8 @@
 package homework.books;
 
-import homework.books.commands.CommandLogin;
 import homework.books.commands.Commands;
+import homework.books.enums.Gender;
+import homework.books.enums.Login;
 import homework.books.exception.AuthorNotFoundException;
 import homework.books.model.Author;
 import homework.books.model.Book;
@@ -10,7 +11,7 @@ import homework.books.storage.BookStorage;
 
 import java.util.Scanner;
 
-public class BookDemo implements Commands, CommandLogin {
+public class BookDemo implements Commands {
 
     private static Scanner scanner = new Scanner(System.in);
     private static BookStorage bookStorage = new BookStorage();
@@ -18,13 +19,7 @@ public class BookDemo implements Commands, CommandLogin {
 
     public static void main(String[] args) {
         boolean run = true;
-        boolean check = true;
-
-        while (check){
-            CommandLogin.printLoginPassword();
-            printEnterLoginPassword();
-            check = false;
-        }
+        checkEnterLoginPassword();
         while (run) {
             Commands.printCommand();
             int command;
@@ -72,14 +67,17 @@ public class BookDemo implements Commands, CommandLogin {
         System.out.println("Please input AuthorEmail");
         String email = scanner.nextLine();
         System.out.println("Please input gender MALE or FEMALE");
-        String gender = scanner.nextLine();
-        String genderUpperCase = gender.toUpperCase();
-        if (genderUpperCase.equals("MALE") || genderUpperCase.equals("FEMALE")) {
-            Author author = new Author(name, surname, email, genderUpperCase);
+        String gender = scanner.nextLine().toUpperCase();
+        try{
+        if (!gender.equals(Gender.MALE.name()) && !gender.equals(Gender.FEMALE.name())) {
+            System.out.println("Please input correct gender");
+            addAuthor();
+        }
+            Gender gender2 = Gender.valueOf(gender);
+            Author author = new Author(name, surname, email, gender2);
             authorStorage.add(author);
-            System.out.println("Author created!");
-        } else {
-            System.out.println("No correct gender!");
+        } catch (NullPointerException e) {
+            System.out.println("Gender cannot be null!");
             addAuthor();
         }
     }
@@ -114,7 +112,7 @@ public class BookDemo implements Commands, CommandLogin {
                     System.out.println(e.getMessage());
                     addBook();
                 }
-            } catch (AuthorNotFoundException  | ArrayIndexOutOfBoundsException e) {
+            } catch (AuthorNotFoundException | ArrayIndexOutOfBoundsException e) {
                 System.out.println(e.getMessage());
                 addBook();
             }
@@ -163,15 +161,16 @@ public class BookDemo implements Commands, CommandLogin {
             printBooksByPriceRange();
         }
     }
-    private  static  void printEnterLoginPassword(){
+
+    private static void checkEnterLoginPassword() {
         System.out.println("Please enter Login");
         String login = scanner.nextLine();
         System.out.println("Please enter password");
         String password = scanner.nextLine();
-        if (!login.equals("admin") && !password.equals("123456")){
-            System.out.println("Wrong login and password asks to enter again");
-            printEnterLoginPassword();
-        }else {
+        if (!login.equals(Login.LOGIN.getValue()) && !password.equals(Login.PASSWORD.getValue())) {
+            System.out.println("Wrong login and password please  input again");
+            checkEnterLoginPassword();
+        } else {
             System.out.println("request approved");
         }
     }
