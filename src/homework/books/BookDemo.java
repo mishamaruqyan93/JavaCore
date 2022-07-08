@@ -1,5 +1,6 @@
 package homework.books;
 
+import homework.books.commands.CommandLogin;
 import homework.books.commands.Commands;
 import homework.books.exception.AuthorNotFoundException;
 import homework.books.model.Author;
@@ -9,13 +10,21 @@ import homework.books.storage.BookStorage;
 
 import java.util.Scanner;
 
-public class BookDemo implements Commands {
+public class BookDemo implements Commands, CommandLogin {
+
     private static Scanner scanner = new Scanner(System.in);
     private static BookStorage bookStorage = new BookStorage();
     private static AuthorStorage authorStorage = new AuthorStorage();
 
     public static void main(String[] args) {
         boolean run = true;
+        boolean check = true;
+
+        while (check){
+            CommandLogin.printLoginPassword();
+            printEnterLoginPassword();
+            check = false;
+        }
         while (run) {
             Commands.printCommand();
             int command;
@@ -94,7 +103,6 @@ public class BookDemo implements Commands {
                     int count = Integer.parseInt(scanner.nextLine());
                     System.out.println("Please input book genre");
                     String genre = scanner.nextLine();
-
                     if (title == null || title.trim().isEmpty() || genre == null || genre.trim().isEmpty() || price <= 0 || count <= 0) {
                         System.out.println("No correct data");
                         addBook();
@@ -102,12 +110,11 @@ public class BookDemo implements Commands {
                     Book book = new Book(title, author, price, count, genre);
                     bookStorage.add(book);
                     System.out.println("Book was added");
-
                 } catch (NumberFormatException e) {
                     System.out.println(e.getMessage());
                     addBook();
                 }
-            } catch (AuthorNotFoundException e) {
+            } catch (AuthorNotFoundException  | ArrayIndexOutOfBoundsException e) {
                 System.out.println(e.getMessage());
                 addBook();
             }
@@ -154,6 +161,18 @@ public class BookDemo implements Commands {
         } catch (NumberFormatException e) {
             System.out.println(e.getMessage());
             printBooksByPriceRange();
+        }
+    }
+    private  static  void printEnterLoginPassword(){
+        System.out.println("Please enter Login");
+        String login = scanner.nextLine();
+        System.out.println("Please enter password");
+        String password = scanner.nextLine();
+        if (!login.equals("admin") && !password.equals("123456")){
+            System.out.println("Wrong login and password asks to enter again");
+            printEnterLoginPassword();
+        }else {
+            System.out.println("request approved");
         }
     }
 }
