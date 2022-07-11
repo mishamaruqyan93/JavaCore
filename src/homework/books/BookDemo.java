@@ -1,7 +1,7 @@
 package homework.books;
 
 import homework.books.commands.Commands;
-import homework.books.enums.Gender;
+import homework.books.model.Gender;
 import homework.books.exception.AuthorNotFoundException;
 import homework.books.model.Author;
 import homework.books.model.Book;
@@ -118,7 +118,7 @@ public class BookDemo implements Commands {
         } else {
             if (userStorage.getUserByEmail(userData[2]) == null) {
                 User user = new User();
-                user.setPassword(userData[0]);
+                user.setName(userData[0]);
                 user.setSurname(userData[1]);
                 user.setEmail(userData[2]);
                 user.setPassword(userData[3]);

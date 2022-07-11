@@ -1,7 +1,5 @@
 package homework.books.model;
 
-import homework.books.enums.Gender;
-
 import java.util.Objects;
 
 public class Author  {
